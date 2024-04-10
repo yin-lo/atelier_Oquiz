@@ -7,26 +7,28 @@ const tagController = require('./controllers/tagController');
 const signupController = require('./controllers/signupController');
 const loginController = require('./controllers/loginController');
 
+const { catchErrors } = require('./middlewares/error/error');
+
 const router = Router();
 
 // page d'accueil :
-router.get('/', mainController.index);
+router.get('/', catchErrors(mainController.index));
 
 // page de jeu d'un quiz :
-router.get('/quiz/:id', quizController.getList);
+router.get('/quiz/:id', catchErrors(quizController.getList));
 
 // page de levels :
-router.get('/levels', levelController.list);
-router.post('/levels', levelController.create);
+router.get('/levels', catchErrors(levelController.list));
+router.post('/levels', catchErrors(levelController.create));
 
 // page des thèmes :
-router.get('/tags', tagController.list);
+router.get('/tags', catchErrors(tagController.list));
 
 // page d'inscription :
-router.get('/signup', signupController.index);
-router.post('signup', signupController.registration);
+router.get('/signup', catchErrors(signupController.index));
+router.post('signup', catchErrors(signupController.registration));
 
 // page de connexion : 
-router.get('/login', loginController.index);
+router.get('/login', catchErrors(loginController.index));
 
 module.exports = router;

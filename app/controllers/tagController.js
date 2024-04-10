@@ -9,7 +9,13 @@ const tagController = {
 			include: 'quizzes',
 			order: [['name', 'ASC']],
 		});
-		cpretty(tagList);
+
+		//si aucun tagList en BDD, on passe par le middleware du stack :
+		if (!tagList) {
+			return next();
+		}
+
+		// cpretty(tagList);
 		res.render('tags', { tags: tagList });
 	},
 };

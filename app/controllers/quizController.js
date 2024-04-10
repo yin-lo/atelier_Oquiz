@@ -27,11 +27,17 @@ const quizController = {
 		},
 	],
 	});
+
+	//si aucun questionOfQuiz en BDD, on passe par le middleware du stack :
+	if (!questionsOfQuiz) {
+		return next();
+	}
+	
 	// cpretty(questionsOfQuiz);
 	// TODO - mettre en forme la date ave DAY.JS
 
 	// TODO - mettre la bonne réponse dans les inputs
-	
+
 	res.render('quiz', {quiz: questionsOfQuiz})
   },
 };
