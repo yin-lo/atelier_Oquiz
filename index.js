@@ -9,7 +9,6 @@ const { notFound, errorHandler } = require('./app/middlewares/error/error');
 
 const app = express();
 
-
 app.set('view engine', 'ejs');
 app.set('views', './app/views');
 

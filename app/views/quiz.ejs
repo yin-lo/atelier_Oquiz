@@ -8,7 +8,7 @@
   
 	<h2 class="small text-end">Par <%= quiz.author.firstname %> <%= quiz.author.lastname %></h2>
   
-	<h2 class="small text-end">Date de création : <%= quiz.createdAt %></h2>
+	<h2 class="small text-end">Date de création : <%= date %></h2>
   
 	<h3>Thèmes</h3>
 	<ul class="mb-4 p-0">
@@ -38,5 +38,9 @@
 	<button class="d-block mx-auto btn btn-primary mb-4">Envoyer</button>
   </main>
   
+  <script src="path/to/dayjs/dayjs.min.js"></script>
+<script>
+  dayjs().format()
+</script>
   <!--  Include footers here -->  
 <%- include('partials/footer') %>
