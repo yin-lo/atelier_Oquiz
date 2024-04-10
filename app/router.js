@@ -26,7 +26,7 @@ router.get('/tags', catchErrors(tagController.list));
 
 // page d'inscription :
 router.get('/signup', catchErrors(signupController.index));
-router.post('signup', catchErrors(signupController.registration));
+router.post('/signup', catchErrors(signupController.registration));
 
 // page de connexion : 
 router.get('/login', catchErrors(loginController.index));

@@ -1,7 +1,7 @@
 const { Tag } = require('../models');
 
-const pretty = (obj) => JSON.stringify(obj, null, 2);
-const cpretty = (obj) => console.log(pretty(obj));
+// const pretty = (obj) => JSON.stringify(obj, null, 2);
+// const cpretty = (obj) => console.log(pretty(obj));
 
 const tagController = {
 	async list(req, res) {
