@@ -14,8 +14,9 @@ const mainController = {
 					association: 'author',
 				},
 			],
+      order: [['title', 'ASC']],
 		});
-    cpretty(quizz);
+    // cpretty(quizz);
 
 		res.render('home', { quizz });
 	},
