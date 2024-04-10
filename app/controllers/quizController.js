@@ -41,7 +41,6 @@ const quizController = {
 	}
 	
 	// cpretty(questionsOfQuiz);
-	// TODO - mettre en forme la date ave DAY.JS
 
 	// TODO - mettre la bonne réponse dans les inputs
 
