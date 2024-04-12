@@ -27,6 +27,7 @@ const signupController = {
 
 		// vérifier si l'email est bien unique dans la BDD:
 		// (on peut aussi ajouter la contrainte UNIQUE dans le BDD)
+		// (on peut aussi l'écrire dans le model)
 		const userFound = await User.findOne({
 			where: {
 				email: email
@@ -64,16 +65,7 @@ const signupController = {
 		req.session.userId = newUser.id;
 
 		res.redirect('/');
-		//res.send('ok');
-		// const newUser = await User.create({
-		// 	firstname: req.body.firstname,
-		// 	lastname: req.body.lastname,
-		// 	email: req.body.email,
-		// 	password: req.body.password,
-		// });
-
-		// cpretty(req.body);
-
+	
 	},
 };
 

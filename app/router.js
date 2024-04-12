@@ -6,23 +6,25 @@ const quizController = require('./controllers/quizController');
 const tagController = require('./controllers/tagController'); 
 const signupController = require('./controllers/signupController');
 const loginController = require('./controllers/loginController');
+const isLogged = require('./middlewares/isLogged');
 
 const { catchErrors } = require('./middlewares/error/error');
 
 const router = Router();
 
 // page d'accueil :
-router.get('/', catchErrors(mainController.index));
+router.get('/', isLogged, 
+catchErrors(mainController.index));
 
 // page de jeu d'un quiz :
-router.get('/quiz/:id', catchErrors(quizController.getList));
+router.get('/quiz/:id', isLogged, catchErrors(quizController.getList));
 
 // page de levels :
-router.get('/levels', catchErrors(levelController.list));
-router.post('/levels', catchErrors(levelController.create));
+router.get('/levels',isLogged,  catchErrors(levelController.list));
+router.post('/levels',isLogged,  catchErrors(levelController.create));
 
 // page des thèmes :
-router.get('/tags', catchErrors(tagController.list));
+router.get('/tags',isLogged,  catchErrors(tagController.list));
 
 // page d'inscription :
 router.get('/signup', catchErrors(signupController.index));
