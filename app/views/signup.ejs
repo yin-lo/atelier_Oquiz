@@ -5,10 +5,12 @@
 
   <h1>Inscription</h1>
 
-  <!-- Toast en cas d'erreur -->
-  <!-- <div class="alert alert-danger" role="alert">
-    Une erreur s'est produite lors de l'inscription.
-  </div> -->
+  <!-- Toast en cas d'erreur  -->
+  <% if (typeof errorMessage !== 'undefined') { %>
+    <div class="alert alert-danger" role="alert">
+      Une erreur s'est produite lors de la connexion.
+    </div>
+    <% } %>
 
   <form action="/signup" method="POST">
     <label class="form-label h4" for="firstname">Prénom</label>

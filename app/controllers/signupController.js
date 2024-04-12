@@ -1,7 +1,10 @@
+const bcrypt = require ('bcrypt');
+const validator = require('validator');
+
 const { User } = require('../models');
 
-const pretty = (obj) => JSON.stringify(obj, null, 2);
-const cpretty = (obj) => console.log(pretty(obj));
+// const pretty = (obj) => JSON.stringify(obj, null, 2);
+// const cpretty = (obj) => console.log(pretty(obj));
 
 const signupController = {
 	index(req, res) {
@@ -26,7 +29,7 @@ const signupController = {
 		// (on peut aussi ajouter la contrainte UNIQUE dans le BDD)
 		const userFound = await User.findOne({
 			where: {
-				email:email
+				email: email
 			}
 		}) 
 
@@ -34,15 +37,8 @@ const signupController = {
 			throw new Error(`L'email existe déjà en BDD`)
 		}
 
-		//avant de stocker, il faut hacher le mdp => installer bcrypt // utiliser bcrypt.hash() 
-
-		// on veut se souvenir de ces informations et les stocker en BDD: 
-		await User.create({
-			firstname: firstname,
-			lastname: lastname,
-			email: email,
-			password: password,
-		})
+		//avant de stocker, il faut hacher le mdp :
+		const hash = await bcrypt.hash(password, process.env.SALT_ROUND || 10);
 
 		// vérifier si mdp = confirmation :
 		if (password !== confirmation) {
@@ -52,13 +48,23 @@ const signupController = {
 		// voir si le mdp est fort :
 		const options = { minLength: 12, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 }
 
-		if (validator.isStrongPassword(password,options)) {
+		if (!validator.isStrongPassword(password, options)) {
 			throw new Error(`Le mdp doit comporter au moins 12 caractères comprenant une majuscule, un symbole et un chiffre.`)
+		} else {
+			// on veut se souvenir de ces informations et les stocker en BDD: 
+			await User.create({
+				firstname: firstname,
+				lastname: lastname,
+				email: email,
+				password: hash,
+			})
 		}
 
-		// 
+		// on ajoute la variable fraichement créée :
+		req.session.userId = newUser.id;
 
-		res.send('ok');
+		res.redirect('/');
+		//res.send('ok');
 		// const newUser = await User.create({
 		// 	firstname: req.body.firstname,
 		// 	lastname: req.body.lastname,
@@ -68,7 +74,6 @@ const signupController = {
 
 		// cpretty(req.body);
 
-		// res.redirect('/');
 	},
 };
 

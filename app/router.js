@@ -30,5 +30,6 @@ router.post('/signup', catchErrors(signupController.registration));
 
 // page de connexion : 
 router.get('/login', catchErrors(loginController.index));
+router.post('/login', loginController.login);
 
 module.exports = router;
