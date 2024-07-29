@@ -4,10 +4,13 @@ const { Tag } = require('../models');
 // const cpretty = (obj) => console.log(pretty(obj));
 
 const tagController = {
-	async list(req, res) {
+	async list(req, res, next) {
 		const tagList = await Tag.findAll({
 			include: 'quizzes',
-			order: [['name', 'ASC']],
+			order: [
+				['name', 'ASC'],
+				['quizzes', 'title', 'ASC']
+			],
 		});
 
 		//si aucun tagList en BDD, on passe par le middleware du stack :

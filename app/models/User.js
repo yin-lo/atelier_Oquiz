@@ -13,10 +13,18 @@ User.init({
   email: {
     type: DataTypes.TEXT,
     allowNull: false,
+    validate: {
+      isEmail: true,
+    }
   },
   password: {
     type: DataTypes.TEXT,
     allowNull: false,
+  },
+  role: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+    defaultValue: 'member',
   },
 }, {
   sequelize,

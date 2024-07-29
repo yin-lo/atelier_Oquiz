@@ -27,7 +27,7 @@ const loginController = {
 		});
 
 		if (!userFound) {
-			thro < new Error(`La combinaison est invalide`);
+			throw new Error(`La combinaison est invalide`);
 		}
 
 		const passwordMatched = await bcrypt.compare(password, userFound.password);

@@ -62,7 +62,7 @@ const signupController = {
 		}
 
 		// on ajoute la variable fraichement créée :
-		req.session.userId = newUser.id;
+		req.session.userId = new User.id;
 
 		res.redirect('/');
 	

@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const router = Router();
 
 const mainController = require('./controllers/mainController');
 const levelController = require('./controllers/levelController');
@@ -10,11 +11,9 @@ const isLogged = require('./middlewares/isLogged');
 
 const { catchErrors } = require('./middlewares/error/error');
 
-const router = Router();
 
 // page d'accueil :
-router.get('/', isLogged, 
-catchErrors(mainController.index));
+router.get('/', catchErrors(mainController.index));
 
 // page de jeu d'un quiz :
 router.get('/quiz/:id', isLogged, catchErrors(quizController.getList));

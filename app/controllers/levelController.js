@@ -1,7 +1,7 @@
 const { Level } = require('../models');
 
 const levelController = {
-	async list(req, res) {
+	async list(req, res, next) {
 		const levels = await Level.findAll();
 		// Pour vérifier le contenu, on peut utiliser le JSON.stringify
 		// console.log(JSON.stringify(levels, null, 2));

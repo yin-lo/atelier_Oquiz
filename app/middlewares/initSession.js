@@ -6,6 +6,8 @@ const session = expressSession({
 	secret: process.env.SECRET,
 	cookie: {
 		secure: false,
+		maxAge: (1000 * 60 * 60), // équivalent à 1h
+		httpOnly: true,
 	},
 });
 

@@ -16,6 +16,11 @@ app.use(express.static(join(__dirname, 'public')));
 
 app.use(initSession);
 
+app.use((req, res, next) => {
+	console.log(req.session);
+	next();
+});
+
 // Pour lire les données des formulaires, il faut ajouter ce middleware
 app.use(express.urlencoded({ extended: true }));
 
