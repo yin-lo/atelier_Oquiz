@@ -2,45 +2,37 @@
 
 <main class="container py-4">
 
-	<h1 class="text-center m-2"><%= quiz.title %></h1>
-  
-	<h2 class="text-center m-2"><%= quiz.description %></h1>
-  
-	<h2 class="small text-end">Par <%= quiz.author.firstname %> <%= quiz.author.lastname %></h2>
-  
-	<h2 class="small text-end">Date de création : <%= date %></h2>
-  
-	<h3>Thèmes</h3>
-	<ul class="mb-4 p-0">
-		<% quiz.tags.forEach(tag => { %>
-			<li class="badge bg-primary"><%= tag.name %></li>
-		<% }) %>
-	</ul>
-  
-	<h3>Questions</h3>
-	<% quiz.questions.forEach(question => { %>
+  <h1 class="text-center m-2"><%= quiz.title %></h1>
 
-	  <span class="badge bg-info"><%= question.level.name %></span>
-	  <p class="fw-bold mb-1"><%= question.description %></p>
-	  <div class="mb-3 ms-2">
-		<% question.answers.forEach(answer => { %>
-			<div>
-			  <input type="radio" id="<%= answer.id %>" name="<%= question.id %>" value="<%= answer.id %>">
-			  <label for="<%= answer.id %>"><%= answer.description %></label>
-			</div>		 
-		<% }) %>
-	
-	  </div>
-	  <p class="fst-italic text-secondary"><%= question.wiki %>&nbsp;: <%= question.anecdote %></p>
+  <h2 class="text-center m-2"><%= quiz.description %></h1>
 
-	<% }) %>
+  <h2 class="small text-end">Par <%= quiz.author.firstname %> <%= quiz.author.lastname %></h2>
 
-	<button class="d-block mx-auto btn btn-primary mb-4">Envoyer</button>
-  </main>
+  <h2 class="small text-end">Date de création : <%= date %></h2>
+
+  <h3>Thèmes</h3>
+  <ul class="mb-4 p-0">
+    <% quiz.tags.forEach(tag => { %>
+      <li class="badge bg-primary"><%= tag.name %></li>
+    <% }) %>
+  </ul>
+
+  <h3>Questions</h3>
+
+  <% quiz.questions.forEach(question => { %>
+    <span class="badge bg-info"><%= question.level.name %></span>
+    <p class="fw-bold mb-1"><%= question.description %></p>
+    <div class="mb-3 ms-2">
+      <% question.answers.forEach(answer => { %>
+        <div>
+          <input type="radio" id="<%= answer.id %>" name="<%= answer.id %>" value="<%= answer.id %>">
+          <label for="<%= answer.id %>"><%= answer.description %></label>
+        </div>
+      <% }) %>
+    </div>
+    <p class="fst-italic text-secondary"><%= question.wiki %>: <%= question.anecdote %></p>
+  <% }) %>
   
-  <script src="path/to/dayjs/dayjs.min.js"></script>
-<script>
-  dayjs().format()
-</script>
-  <!--  Include footers here -->  
+  <button class="d-block mx-auto btn btn-primary mb-4">Envoyer</button>
+</main>
 <%- include('partials/footer') %>

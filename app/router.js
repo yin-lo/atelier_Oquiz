@@ -1,36 +1,32 @@
 const { Router } = require('express');
-const router = Router();
 
+const router = Router();
 const mainController = require('./controllers/mainController');
 const levelController = require('./controllers/levelController');
 const quizController = require('./controllers/quizController');
-const tagController = require('./controllers/tagController'); 
-const signupController = require('./controllers/signupController');
-const loginController = require('./controllers/loginController');
-const isLogged = require('./middlewares/isLogged');
+const tagController = require('./controllers/tagController');
+const authController = require('./controllers/authController');
+const isAuthed = require('./middlewares/isAuthed');
+const isAdmin = require('./middlewares/isAdmin');
 
 const { catchErrors } = require('./middlewares/error/error');
 
-
-// page d'accueil :
 router.get('/', catchErrors(mainController.index));
+router.get('/levels', isAdmin, catchErrors(levelController.list));
+router.post('/levels', isAdmin, catchErrors(levelController.create));
+router.get('/levels/update', isAdmin, catchErrors(levelController.formLevel));
+router.post('/levels/update', isAdmin, catchErrors(levelController.update));
+router.post('/levels/delete', isAdmin, catchErrors(levelController.delete));
 
-// page de jeu d'un quiz :
-router.get('/quiz/:id', isLogged, catchErrors(quizController.getList));
+router.get('/tags', catchErrors(tagController.list));
 
-// page de levels :
-router.get('/levels',isLogged,  catchErrors(levelController.list));
-router.post('/levels',isLogged,  catchErrors(levelController.create));
+router.get('/signup', catchErrors(authController.signupPage));
+router.post('/signup', catchErrors(authController.signupAction));
 
-// page des thèmes :
-router.get('/tags',isLogged,  catchErrors(tagController.list));
+router.get('/login', catchErrors(authController.loginPage));
+router.post('/login', catchErrors(authController.loginAction));
+router.get('/logout', catchErrors(authController.logout));
 
-// page d'inscription :
-router.get('/signup', catchErrors(signupController.index));
-router.post('/signup', catchErrors(signupController.registration));
-
-// page de connexion : 
-router.get('/login', catchErrors(loginController.index));
-router.post('/login', loginController.login);
+router.get('/quiz/:id', isAuthed, catchErrors(quizController.getList));
 
 module.exports = router;

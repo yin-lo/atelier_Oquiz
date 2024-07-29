@@ -1,13 +1,10 @@
 <%- include('partials/header') %>
 <main class="text-center py-4">
-
   <% if (locals.error) { %>
     <p><%= error %></p>
-	
     <%# la partie 500 %>
     <h1>Mince...</h1>
     <p>Une erreur serveur sauvage est apparue... Réessaie plus tard 🙏</p>
-
     <% if (locals.stack) { %>
       <p>
         <pre>
